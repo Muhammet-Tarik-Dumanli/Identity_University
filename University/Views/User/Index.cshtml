@@ -4,16 +4,30 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@{
+    if (Convert.ToInt32(@ViewData["Code"]) == 1)
+    {
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info">@ViewData["Message"]</li>
+        </ul>
+    }
+    else if (Convert.ToInt32(@ViewData["Code"]) == 2)
+    {
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">@ViewData["Message"]</li>
+        </ul>
+    }
+
+}
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                Kullanıcı Bilgisi
+                User Information
             </th>
             <th>
-                İşlem
+                Action
             </th>
         </tr>
     </thead>
@@ -23,11 +37,27 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
+
                 </td>
                 <td>
-                    <a asp-action="Update" asp-route-id="@item.Id">Öğrenci Rolü Ata</a>
+                    <a asp-action="Update" asp-route-id="@item.Id">Assign Student Role</a>
                 </td>
             </tr>
+        }
+
+        @{
+            foreach (var item in (List<UserRole>)ViewData["userManager"])
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        @foreach (var item2 in item.Roles)
+                        {
+                            <h6>@item2</h6>
+                        }
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
