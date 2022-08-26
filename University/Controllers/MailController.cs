@@ -30,7 +30,7 @@ namespace University.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(mail.Sender, "**********");
+                smtp.Credentials = new NetworkCredential(mail.Sender, "password");
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Send(message);
             }
